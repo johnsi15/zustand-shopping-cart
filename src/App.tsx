@@ -1,6 +1,12 @@
 import { useShoppingCart } from './store/shoppingCart'
 import './App.css'
 
+interface Product {
+  id: number
+  name: string
+  price: number
+}
+
 function App() {
   const items = useShoppingCart(state => state.items)
   const addItem = useShoppingCart(state => state.addItem)
@@ -9,8 +15,8 @@ function App() {
   const removeItem = useShoppingCart(state => state.removeItem)
   const clearCart = useShoppingCart(state => state.clearCart)
 
-  const handlerAdd = () => {
-    addItem({ id: 1, name: 'Product 01', price: 500 })
+  const handlerAdd = (product: Product) => () => {
+    addItem(product)
   }
 
   const handlerRemove = (id: number) => () => {
@@ -34,9 +40,19 @@ function App() {
       <main>
         <ul>
           <li>
-            <span>Product Name: </span>
+            <span>Product #1: </span>
             <span>Product Price: </span>
-            <button onClick={handlerAdd}>Add item card</button>
+            <button onClick={handlerAdd({ id: 1, name: 'Product 01', price: 500 })}>Add item card</button>
+          </li>
+          <li>
+            <span>Product #2: </span>
+            <span>Product Price: </span>
+            <button onClick={handlerAdd({ id: 2, name: 'Product 02', price: 700 })}>Add item card</button>
+          </li>
+          <li>
+            <span>Product #3: </span>
+            <span>Product Price: </span>
+            <button onClick={handlerAdd({ id: 3, name: 'Product 03', price: 300 })}>Add item card</button>
           </li>
         </ul>
 
@@ -56,7 +72,10 @@ function App() {
                 <span>Price: {item.product.price}</span>
                 <span>Quantity: {item.quantity}</span>
                 <button onClick={handlerIncreaseQuantity(item.product.id)}>+</button>
-                <button onClick={handlerDecreaseQuantity(item.product.id)}> - </button>
+                <button onClick={handlerDecreaseQuantity(item.product.id)} disabled={item.quantity === 1}>
+                  {' '}
+                  -{' '}
+                </button>
                 <button onClick={handlerRemove(item.product.id)}>Remove Item</button>
               </li>
             )
