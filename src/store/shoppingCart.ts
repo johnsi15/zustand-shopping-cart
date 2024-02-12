@@ -28,7 +28,6 @@ export const useShoppingCart = create<ShoppingCart>((set, get) => ({
     const item = items.find(item => item.product.id === product.id)
 
     if (item) {
-      get().increaseQuantity(product.id, quantity)
       return
     }
 
@@ -36,12 +35,6 @@ export const useShoppingCart = create<ShoppingCart>((set, get) => ({
   },
   removeItem: productId => {
     const { items } = get()
-    const item = items.find(item => item.product.id === productId)
-
-    if (item) {
-      get().decreaseQuantity(productId, 1)
-      return
-    }
 
     set({ items: items.filter(item => item.product.id !== productId) })
   },
@@ -56,7 +49,8 @@ export const useShoppingCart = create<ShoppingCart>((set, get) => ({
   decreaseQuantity: (productId, quantity = 1) => {
     const { items } = get()
     const item = items.find(item => item.product.id === productId)
-    if (item) {
+
+    if (item && item.quantity !== 1) {
       item.quantity -= quantity
       set({ items: [item] })
     }
