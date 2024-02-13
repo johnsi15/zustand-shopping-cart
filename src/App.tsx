@@ -39,6 +39,7 @@ function App() {
   return (
     <>
       <main>
+        <h1>List products</h1>
         <ul>
           <li>
             <span>Product #1: </span>
@@ -57,15 +58,17 @@ function App() {
           </li>
         </ul>
 
-        <h2>List Shopping cart</h2>
-        {items.length === 0 && <p>Cart is empty</p>}
-        {items.length > 0 && (
-          <div>
-            <p>Total items: {items.length}</p>
-            <h3>Total Price: {getTotalPrice()}</h3>
-            <button onClick={handlerClearCart}>Clear cart</button>
-          </div>
-        )}
+        <section className='list_shopping'>
+          <h2>List Shopping cart</h2>
+          {items.length === 0 && <p>Cart is empty</p>}
+          {items.length > 0 && (
+            <div className='totales'>
+              <p>Total items: {items.length}</p>
+              <h3>Total Price: {getTotalPrice()}</h3>
+              <button onClick={handlerClearCart}>Clear cart</button>
+            </div>
+          )}
+        </section>
         <ul>
           {items.map(item => {
             return (
@@ -78,7 +81,7 @@ function App() {
                   {' '}
                   -{' '}
                 </button>
-                <button onClick={handlerRemove(item.product.id)}>Remove Item</button>
+                <button onClick={handlerRemove(item.product.id)}>Remove</button>
               </li>
             )
           })}

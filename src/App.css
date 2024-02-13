@@ -22,6 +22,37 @@ button:disabled {
   opacity: 0.8;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 500px));
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.list_shopping {
+  margin: 50px auto;
+}
+
+.list_shopping h2 {
+  margin: 0;
+}
+
+.list_shopping .totales {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
