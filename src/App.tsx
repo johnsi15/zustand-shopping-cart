@@ -44,17 +44,17 @@ function App() {
           <li>
             <span>Product #1: </span>
             <span>Product Price: 500</span>
-            <button onClick={handlerAdd({ id: 1, name: 'Product 01', price: 500 })}>Add item card</button>
+            <button onClick={handlerAdd({ id: 1, name: 'Product 01', price: 500 })}>Add item cart</button>
           </li>
           <li>
             <span>Product #2: </span>
             <span>Product Price: 700</span>
-            <button onClick={handlerAdd({ id: 2, name: 'Product 02', price: 700 })}>Add item card</button>
+            <button onClick={handlerAdd({ id: 2, name: 'Product 02', price: 700 })}>Add item cart</button>
           </li>
           <li>
             <span>Product #3: </span>
             <span>Product Price: 300</span>
-            <button onClick={handlerAdd({ id: 3, name: 'Product 03', price: 300 })}>Add item card</button>
+            <button onClick={handlerAdd({ id: 3, name: 'Product 03', price: 300 })}>Add item cart</button>
           </li>
         </ul>
 
