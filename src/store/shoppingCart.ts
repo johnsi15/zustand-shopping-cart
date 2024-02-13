@@ -40,22 +40,32 @@ export const useShoppingCart = create<ShoppingCart>((set, get) => ({
   },
   increaseQuantity: (productId, quantity = 1) => {
     const { items } = get()
-    const item = items.find(item => item.product.id === productId)
 
-    if (item) {
-      item.quantity += quantity
-      set({ items: [...items] })
-    }
+    const newItems = structuredClone(items)
+    const itemIndex = newItems.findIndex(item => item.product.id === productId)
+    const itemData = newItems[itemIndex]
+
+    newItems[itemIndex] = { ...itemData, quantity: itemData.quantity + quantity }
+
+    set({ items: newItems })
   },
   decreaseQuantity: (productId, quantity = 1) => {
     const { items } = get()
-    const item = items.find(item => item.product.id === productId)
 
-    if (item && item.quantity !== 1) {
-      item.quantity -= quantity
-      set({ items: [...items] })
-    }
+    const newItems = structuredClone(items)
+    const itemIndex = newItems.findIndex(item => item.product.id === productId)
+    const itemData = newItems[itemIndex]
+
+    const newQuantity = itemData.quantity !== 1 ? itemData.quantity - quantity : quantity
+
+    newItems[itemIndex] = { ...itemData, quantity: newQuantity }
+
+    set({ items: newItems })
   },
-  getTotalPrice: () => 0,
+  getTotalPrice: () => {
+    const { items } = get()
+
+    return items.reduce((total, item) => total + item.product.price * item.quantity, 0)
+  },
   clearCart: () => set({ items: [] }),
 }))

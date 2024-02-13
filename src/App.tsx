@@ -14,6 +14,7 @@ function App() {
   const decreaseQuantity = useShoppingCart(state => state.decreaseQuantity)
   const removeItem = useShoppingCart(state => state.removeItem)
   const clearCart = useShoppingCart(state => state.clearCart)
+  const getTotalPrice = useShoppingCart(state => state.getTotalPrice)
 
   const handlerAdd = (product: Product) => () => {
     addItem(product)
@@ -41,17 +42,17 @@ function App() {
         <ul>
           <li>
             <span>Product #1: </span>
-            <span>Product Price: </span>
+            <span>Product Price: 500</span>
             <button onClick={handlerAdd({ id: 1, name: 'Product 01', price: 500 })}>Add item card</button>
           </li>
           <li>
             <span>Product #2: </span>
-            <span>Product Price: </span>
+            <span>Product Price: 700</span>
             <button onClick={handlerAdd({ id: 2, name: 'Product 02', price: 700 })}>Add item card</button>
           </li>
           <li>
             <span>Product #3: </span>
-            <span>Product Price: </span>
+            <span>Product Price: 300</span>
             <button onClick={handlerAdd({ id: 3, name: 'Product 03', price: 300 })}>Add item card</button>
           </li>
         </ul>
@@ -61,6 +62,7 @@ function App() {
         {items.length > 0 && (
           <div>
             <p>Total items: {items.length}</p>
+            <h3>Total Price: {getTotalPrice()}</h3>
             <button onClick={handlerClearCart}>Clear cart</button>
           </div>
         )}
