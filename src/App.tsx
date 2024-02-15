@@ -1,4 +1,5 @@
 import { useShoppingCart } from './store/shoppingCart'
+import { useShallow } from 'zustand/react/shallow'
 import './App.css'
 
 interface Product {
@@ -8,13 +9,25 @@ interface Product {
 }
 
 function App() {
-  const items = useShoppingCart(state => state.items)
-  const addItem = useShoppingCart(state => state.addItem)
-  const increaseQuantity = useShoppingCart(state => state.increaseQuantity)
-  const decreaseQuantity = useShoppingCart(state => state.decreaseQuantity)
-  const removeItem = useShoppingCart(state => state.removeItem)
-  const clearCart = useShoppingCart(state => state.clearCart)
-  const getTotalPrice = useShoppingCart(state => state.getTotalPrice)
+  // const items = useShoppingCart(state => state.items)
+  // const addItem = useShoppingCart(state => state.addItem)
+  // const increaseQuantity = useShoppingCart(state => state.increaseQuantity)
+  // const decreaseQuantity = useShoppingCart(state => state.decreaseQuantity)
+  // const removeItem = useShoppingCart(state => state.removeItem)
+  // const clearCart = useShoppingCart(state => state.clearCart)
+  // const getTotalPrice = useShoppingCart(state => state.getTotalPrice)
+
+  const { items, addItem, increaseQuantity, decreaseQuantity, removeItem, clearCart, getTotalPrice } = useShoppingCart(
+    useShallow(state => ({
+      items: state.items,
+      addItem: state.addItem,
+      increaseQuantity: state.increaseQuantity,
+      decreaseQuantity: state.decreaseQuantity,
+      removeItem: state.removeItem,
+      clearCart: state.clearCart,
+      getTotalPrice: state.getTotalPrice,
+    }))
+  )
 
   const handlerAdd = (product: Product) => () => {
     addItem(product)
